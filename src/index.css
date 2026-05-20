@@ -1,0 +1,439 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  
+  --color-srl-blue: #0075BB;
+  --color-srl-blue-dark: #005a8e;
+  --color-srl-blue-light: #e6f3fb;
+  --color-srl-gold: #FFCB05;
+  --color-srl-gold-dark: #e6b800;
+  --color-agilus-green: #76C58F;
+  --color-agilus-red: #ED1C24;
+  --color-google-blue: #1a73e8;
+  --color-google-grey: #5f6368;
+  --color-google-dark: #202124;
+  --color-google-light-grey: #f1f3f4;
+  --color-google-border: #dadce0;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-slate-50 text-[#202124] font-sans antialiased selection:bg-srl-blue selection:text-white;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ===================================
+   SCROLLBAR UTILITIES
+=================================== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.thin-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+.thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb { background: #dadce0; border-radius: 4px; }
+.thin-scrollbar::-webkit-scrollbar-thumb:hover { background: #0075BB; }
+
+/* ===================================
+   SAFE AREA
+=================================== */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+/* ===================================
+   GLASS MORPHISM PANELS
+=================================== */
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-panel-dark {
+    background: linear-gradient(135deg, rgba(0, 55, 110, 0.96) 0%, rgba(0, 87, 163, 0.94) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-panel-white {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(218, 220, 224, 0.7);
+  }
+
+  /* ===================================
+     GLOW EFFECTS
+  =================================== */
+  .glow-blue { box-shadow: 0 0 24px rgba(0, 117, 187, 0.2), 0 0 8px rgba(0, 117, 187, 0.1); }
+  .glow-gold { box-shadow: 0 0 24px rgba(255, 203, 5, 0.4), 0 0 8px rgba(255, 203, 5, 0.2); }
+  .glow-white { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+  
+  /* ===================================
+     SHADOW SYSTEM
+  =================================== */
+  .shadow-premium { box-shadow: 0 4px 6px -1px rgba(0,0,0,.04), 0 10px 30px -10px rgba(0,117,187,.08), 0 2px 4px -1px rgba(0,0,0,.03); }
+  .shadow-card { box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.06); }
+  .shadow-lift { box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04); }
+  .shadow-deep { box-shadow: 0 20px 40px -8px rgba(0,117,187,.15), 0 4px 16px rgba(0,0,0,.06); }
+  
+  /* ===================================
+     TEXT EFFECTS
+  =================================== */
+  .text-glow { text-shadow: 0 0 20px rgba(255,255,255,.5); }
+  .text-gradient-blue { background: linear-gradient(135deg, #0075BB 0%, #1a8fd1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .text-gradient-gold { background: linear-gradient(135deg, #FFCB05 0%, #f0a500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  /* ===================================
+     GRADIENT BACKGROUNDS
+  =================================== */
+  .bg-blue-gradient { background: linear-gradient(135deg, #0075BB 0%, #005a8e 100%); }
+  .bg-gold-gradient { background: linear-gradient(135deg, #FFCB05 0%, #e6b800 100%); }
+  .bg-premium-gradient { background: linear-gradient(160deg, #f0f7ff 0%, #fafbff 40%, #fff9e6 100%); }
+  .bg-hero-dark { background: linear-gradient(135deg, #003B6D 0%, #0075BB 60%, #005a8e 100%); }
+
+  /* ===================================
+     INTERACTIVE STATES
+  =================================== */
+  .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+  
+  .active-scale { transition: transform 0.1s ease; }
+  .active-scale:active { transform: scale(0.96); }
+
+  /* ===================================
+     ANIMATED BORDERS
+  =================================== */
+  .border-gradient {
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #0075BB, #FFCB05) border-box;
+    border: 1.5px solid transparent;
+  }
+  
+  .border-gradient-dark {
+    background: linear-gradient(rgba(0,55,110,0.9), rgba(0,55,110,0.9)) padding-box,
+                linear-gradient(135deg, #FFCB05, #0075BB) border-box;
+    border: 1.5px solid transparent;
+  }
+
+  /* ===================================
+     CHIP / BADGE
+  =================================== */
+  .chip-blue { @apply text-[9px] font-black text-srl-blue bg-srl-blue/8 border border-srl-blue/15 px-2 py-0.5 rounded-full uppercase tracking-widest; }
+  .chip-gold { @apply text-[9px] font-black text-[#8a6a00] bg-srl-gold/20 border border-srl-gold/30 px-2 py-0.5 rounded-full uppercase tracking-widest; }
+  .chip-green { @apply text-[9px] font-black text-emerald-700 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-widest; }
+  .chip-red { @apply text-[9px] font-black text-agilus-red bg-agilus-red/8 border border-agilus-red/15 px-2 py-0.5 rounded-full uppercase tracking-widest; }
+
+  /* ===================================
+     SECTION CARDS
+  =================================== */
+  .section-card { @apply bg-white rounded-3xl border border-[#dadce0]/60; box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.06); }
+  .section-card-hover { @apply bg-white rounded-3xl border border-[#dadce0]/60 hover:border-srl-blue/20 transition-all duration-200; box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.06); }
+  .section-card-hover:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04); }
+
+  /* ===================================
+     LIVE PULSE INDICATOR
+  =================================== */
+  .live-dot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite;
+    background: inherit;
+    opacity: 0.6;
+  }
+}
+
+/* ===================================
+   GMB-STYLE ACTION BUTTONS
+=================================== */
+.gmb-button {
+  @apply flex flex-col items-center justify-center p-3 rounded-2xl 
+         hover:bg-srl-blue/6 transition-all duration-200 text-srl-blue 
+         active:scale-90 touch-manipulation border border-transparent hover:border-srl-blue/10;
+}
+
+.gmb-action-icon { @apply w-6 h-6 mb-1.5 transition-transform duration-200 group-hover:scale-110; }
+
+/* ===================================
+   CTA BUTTON SYSTEM
+=================================== */
+.btn-primary {
+  @apply bg-srl-blue hover:bg-srl-blue-dark text-white font-black text-xs 
+         rounded-full px-6 py-3 transition-all duration-200 shadow-md hover:shadow-lg 
+         active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-secondary {
+  @apply border border-[#dadce0] hover:bg-google-light-grey text-srl-blue font-bold text-xs 
+         rounded-full px-5 py-2.5 transition-all duration-200 active:scale-95 flex items-center justify-center gap-2;
+}
+
+.btn-whatsapp {
+  @apply bg-[#25D366] hover:bg-[#1db954] text-white font-black text-xs
+         rounded-full px-6 py-3 transition-all duration-200 shadow-md hover:shadow-lg
+         active:scale-95 flex items-center justify-center gap-2;
+}
+
+/* ===================================
+   SWIPER OVERRIDES
+=================================== */
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 18px;
+  @apply !w-8 !h-8 rounded-full bg-white/90 backdrop-blur-sm shadow-md border border-[#dadce0]/40 text-srl-blue;
+}
+
+.swiper-pagination-bullet {
+  @apply !bg-white !opacity-60;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-srl-gold !opacity-100;
+}
+
+/* ===================================
+   MOBILE TAB NAVIGATION
+=================================== */
+.tab-nav-item {
+  @apply py-3 px-4 text-[10px] font-bold uppercase tracking-wider border-b-2 shrink-0 
+         transition-all duration-200 whitespace-nowrap;
+}
+
+.tab-nav-item.active { @apply border-srl-blue text-srl-blue; }
+.tab-nav-item:not(.active) { @apply border-transparent text-google-grey hover:text-srl-blue; }
+
+/* ===================================
+   FORM ELEMENTS
+=================================== */
+.form-input {
+  @apply w-full px-4 py-3 rounded-2xl border border-google-border outline-none text-sm 
+         transition-all duration-200 bg-white/80 text-[#202124] placeholder-google-grey
+         focus:ring-2 focus:ring-srl-blue/15 focus:border-srl-blue;
+}
+
+.form-input-error {
+  @apply border-agilus-red focus:ring-agilus-red/20 focus:border-agilus-red;
+}
+
+.form-label {
+  @apply text-[10px] font-black text-srl-blue uppercase tracking-widest block mb-1.5;
+}
+
+.form-error {
+  @apply text-[9px] text-agilus-red font-bold mt-1 flex items-center gap-1;
+}
+
+/* ===================================
+   PRICING CARDS
+=================================== */
+.price-card {
+  @apply border border-[#dadce0] rounded-3xl overflow-hidden bg-white 
+         hover:border-srl-blue/40 transition-all duration-300
+         flex flex-col;
+}
+
+.price-card-featured {
+  @apply border-2 border-srl-gold bg-white flex flex-col;
+  border-radius: 1.5rem;
+}
+
+/* ===================================
+   TABLE STYLES
+=================================== */
+.data-table { @apply w-full text-left border-collapse; }
+.data-table th { @apply p-3.5 font-black text-xs text-[#202124] bg-slate-50 border-b border-[#dadce0]; }
+.data-table td { @apply p-3 text-[11px] text-google-grey border-b border-[#dadce0]/50; }
+.data-table tr:hover td { @apply bg-slate-50/70; }
+.data-table tr:last-child td { @apply border-0; }
+
+/* ===================================
+   ANIMATION KEYFRAMES
+=================================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(0,117,187,0.2); }
+  50% { box-shadow: 0 0 24px rgba(0,117,187,0.4); }
+}
+
+@keyframes border-pulse {
+  0%, 100% { border-color: rgba(0,117,187,0.2); }
+  50% { border-color: rgba(0,117,187,0.6); }
+}
+
+/* ===================================
+   ANIMATION UTILITIES
+=================================== */
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-slide-up { animation: slide-up 0.3s ease-out forwards; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-border-pulse { animation: border-pulse 2s ease-in-out infinite; }
+
+.shimmer-bg {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ===================================
+   PROGRESS BARS
+=================================== */
+.progress-track { @apply w-full bg-slate-200 h-2 rounded-full overflow-hidden; }
+.progress-bar { @apply h-full rounded-full transition-all duration-700 ease-out; }
+
+/* ===================================
+   FEATURE LIST
+=================================== */
+.feature-item { @apply flex items-start gap-3 text-sm text-google-grey; }
+.feature-item-icon { @apply w-5 h-5 text-emerald-500 shrink-0 mt-0.5; }
+.feature-item-text { @apply leading-relaxed; }
+
+/* ===================================
+   REVIEW CARD
+=================================== */
+.review-card {
+  @apply border border-[#dadce0]/70 rounded-2xl p-4 bg-white
+         hover:border-srl-blue/20 transition-all duration-200;
+}
+
+/* ===================================
+   MOBILE BOOKING FORM MODAL
+=================================== */
+.booking-modal-header {
+  background: linear-gradient(135deg, #003B6D 0%, #0075BB 100%);
+}
+
+/* ===================================
+   DESKTOP HERO SECTION
+=================================== */
+.hero-dark-bg {
+  background: linear-gradient(135deg, #002D55 0%, #0075BB 50%, #004A8F 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-dark-bg::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 70%;
+  height: 200%;
+  background: radial-gradient(ellipse, rgba(255,203,5,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-dark-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 50%;
+  height: 150%;
+  background: radial-gradient(ellipse, rgba(118,197,143,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===================================
+   STAT COUNTER CHIPS
+=================================== */
+.stat-chip {
+  @apply flex flex-col items-center bg-white/10 border border-white/15 rounded-2xl px-4 py-3 
+         text-white backdrop-blur-sm;
+}
+
+/* ===================================
+   FAQ ACCORDION
+=================================== */
+.faq-item { @apply border border-[#dadce0]/60 rounded-2xl overflow-hidden transition-all duration-200; }
+.faq-item:hover { @apply border-srl-blue/30; box-shadow: 0 2px 8px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.06); }
+.faq-trigger { @apply w-full text-left p-4 flex items-center justify-between bg-slate-50/40 hover:bg-slate-50 transition-colors duration-150; }
+.faq-content { @apply p-4 bg-white border-t border-[#dadce0]/40 text-[11px] text-google-grey leading-relaxed border-l-4 border-srl-blue; }
+
+/* ===================================
+   MAPS / RIGHT COLUMN
+=================================== */
+.maps-hud {
+  @apply absolute top-4 left-4 right-4 p-3 rounded-2xl;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(218, 220, 224, 0.7);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.04);
+}
+
+/* ===================================
+   PACKAGE SUB-TABS
+=================================== */
+.pkg-tab {
+  @apply whitespace-nowrap px-4 py-3 text-[11px] font-bold transition-all duration-200 
+         flex items-center gap-1.5 border-b-2;
+}
+
+.pkg-tab.active { @apply border-srl-blue text-srl-blue; }
+.pkg-tab:not(.active) { @apply border-transparent text-google-grey hover:text-srl-blue hover:border-srl-blue/30; }
+
+/* ===================================
+   SERVICE ACCORDION (DESKTOP)
+=================================== */
+.service-category-card {
+  @apply border border-[#dadce0]/60 rounded-2xl overflow-hidden 
+         hover:border-srl-blue/30 transition-all duration-200;
+}
+
+/* ===================================
+   MOBILE-SPECIFIC OPTIMIZATIONS
+=================================== */
+@media (max-width: 1023px) {
+  .mobile-header-shadow {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  /* Touch target minimum 44px */
+  .mobile-touch { min-height: 44px; }
+}
+
+/* ===================================
+   DESKTOP SPECIFIC
+=================================== */
+@media (min-width: 1024px) {
+  .desktop-hover-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,117,187,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  }
+}
